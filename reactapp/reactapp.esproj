@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\assets\images\articleimg\" />
+    <Folder Include="src\Register\" />
     <Folder Include="src\redux\" />
   </ItemGroup>
   <ItemGroup>

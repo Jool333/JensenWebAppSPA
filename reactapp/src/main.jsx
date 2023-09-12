@@ -1,19 +1,37 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 //import 'bootstrap/dist/css/bootstrap.css'
-import ScrollToTopButton from './components/ScrollToTop/ScrollToTopButton.jsx'
 import store from '@/redux/store'
-import Grid from '@/components/grid/grid.jsx'
 import { Provider } from 'react-redux'
+import { CookiesProvider } from 'react-cookie';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import ScrollToTopButton from './components/ScrollToTop/ScrollToTopButton.jsx'
+import Grid from '@/components/grid/grid.jsx'
+import Login from '@/components/loginform/login.jsx'
+import createaccount from '@/components/loginform/createaccount.jsx'
+
 
 //import './site.css'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <Grid />
-            <ScrollToTopButton />
-        </Provider>
-        
-  </React.StrictMode>,
-)
+
+const App = () => {
+    return (
+        <CookiesProvider>
+            <Provider store={store}>
+                <Router>
+                    <div>
+                        <ScrollToTopButton />
+                        <Routes>
+                            <Route path="/*" element={<Grid />} />
+
+                        </Routes>
+                    </div>
+                </Router>
+            </Provider>
+        </CookiesProvider>
+    );
+};
+
+
+ReactDOM.createRoot(document.getElementById('root')).render( <App />)

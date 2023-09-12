@@ -38,6 +38,14 @@ export default defineConfig({
             '^/home': {  // <-- Added this route
                 target: 'https://localhost:7242/',
                 secure: false
+            },
+            '^/authenticate/login': {  // <-- Added this route
+                target: 'https://localhost:7242/',
+                secure: false
+            },
+            '^/authenticate/register': {  // <-- Added this route
+                target: 'https://localhost:7242/',
+                secure: false
             }
         },
         port: 5173,

@@ -1,17 +1,15 @@
-ï»¿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, FloatingLabel } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 
-const CreateAccount = () => {
-    
+//const CreateAccount = () => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [user, setUser] = useState('');
     const navigate = useNavigate();
 
     const handleRegister = async () => {
         const body = {
-             "email": email, "password": password
+            "username": username, "email": email, "password": password
         }
         const response = await fetch(`/authenticate/register`, {
             method: "POST",
@@ -23,12 +21,21 @@ const CreateAccount = () => {
         const data = await response.json();
         alert(data.message);
         if (response.status === 201) {
-            navigate('/');
+            navigate('/login');
         }
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+        console.log(formData);  // Log the formData for now.
+    };
+
     return (
-        <Form onSubmit={handleRegister}>
+        <Form onSubmit={handleSubmit}>
             <FloatingLabel
                 controlId="floatingInputEmail"
                 label="Email"
@@ -38,56 +45,41 @@ const CreateAccount = () => {
                     type="email"
                     placeholder="Email"
                     name="email"
-                    value={email}
+                    value={formData.email}
                     onChange={(e) => setEmail(e.target.value)}
-                />
-            </FloatingLabel>
-
-        
-            <FloatingLabel
-                controlId="floatingInputUserName"
-                label="User"
-                className="mb-3"
-            >
-                <Form.Control
-                    type="Text"
-                    placeholder="UserName"
-                    name="User"
-                    value={user}
-                    onChange={(e) => setUser(e.target.value)}
                 />
             </FloatingLabel>
 
             <FloatingLabel
                 controlId="floatingInputPassword"
-                label="LÃ¶senord"
+                label="Lösenord"
                 className="mb-3"
             >
                 <Form.Control
                     type="password"
-                    placeholder="LÃ¶senord"
+                    placeholder="Lösenord"
                     name="password"
-                    value={password}
-                   onChange={(e) => setPassword(e.target.value)}
+                    value={formData.password}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
             </FloatingLabel>
 
             <FloatingLabel
                 controlId="floatingConfirmPassword"
-                label="BekrÃ¤fta lÃ¶senord"
+                label="Bekräfta lösenord"
                 className="mb-3"
             >
                 <Form.Control
                     type="password"
-                    placeholder="BekrÃ¤fta lÃ¶senord"
+                    placeholder="Bekräfta lösenord"
                     name="confirmPassword"
-                    
-                    
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
                 />
             </FloatingLabel>
 
             <Form.Group className="mb-3">
-                <Form.Check type="checkbox" label="GodkÃ¤nn villkoren" />
+                <Form.Check type="checkbox" label="Godkänn villkoren" />
             </Form.Group>
 
             <Button variant="outline-primary" type="submit" onClick={handleRegister}>
@@ -100,4 +92,4 @@ const CreateAccount = () => {
     );
 }
 
-export default CreateAccount;
+//export default CreateAccount;

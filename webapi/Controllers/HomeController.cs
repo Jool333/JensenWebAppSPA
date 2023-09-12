@@ -50,7 +50,7 @@ namespace webapi.Controllers
         private List<Article> GetArticlesFromDatabase(bool ascending = true)
         {
             // Connection string for MySQL database
-            string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=Hoshyar22";
+            string connStr = "server=localhost;user=root;database=newsextractdb;port=3306;password=1324";
 
             // SQL query to retrieve data from database
             string sql = "SELECT title, summary, link, published, topic FROM news";
@@ -58,7 +58,7 @@ namespace webapi.Controllers
             // Create a list to hold Article objects
             List<Article> articles = new List<Article>();
 
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+           /* using (MySqlConnection conn = new MySqlConnection(connStr))
             {
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
@@ -79,7 +79,7 @@ namespace webapi.Controllers
                     }
                 }
             }
-
+           */
             return articles;
         }
 
